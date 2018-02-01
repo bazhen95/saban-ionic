@@ -40,8 +40,8 @@ function runApp() {
     var b = document.getElementById('sum_refill_number');
     var val = (b.value - b.min) / (b.max - b.min);
     document.getElementById('sum_refill_range').style.backgroundImage = '-webkit-gradient(linear, left top, right top, ' +
-      'color-stop(' + val + ', #94A14E),' +
-      'color-stop(' + val + ', #C5C5C5)' +
+      'color-stop(' + val + ', #00d936),' +
+      'color-stop(' + val + ', #000000)' +
       ')';
   });
   addEvent('#sum_refill_range', 'change', function() {
@@ -51,8 +51,8 @@ function runApp() {
     var val = (a.value - a.min) / (a.max - a.min);
     document.getElementById('sum_refill_number').value = c;
     b.backgroundImage = '-webkit-gradient(linear, left top, right top, ' +
-      'color-stop(' + val + ', #94A14E), ' +
-      'color-stop(' + val + ', #C5C5C5)' +
+      'color-stop(' + val + ', #00d936), ' +
+      'color-stop(' + val + ', #000000)' +
       ')';
   });
   addEvent('#refill_isTrue', 'click', function() {
@@ -62,7 +62,6 @@ function runApp() {
     refill_result = false;
   });
 }
-
 //отправляю POST запрос и получаю ответ
 function postResult() {
   var xhr = new XMLHttpRequest();
@@ -71,15 +70,11 @@ function postResult() {
   var c = document.getElementById('years_deposit').value;
   var d = document.getElementById('sum_refill_number').value;
   var e = refill_result;
-  if(a != null) {
+  if(a != null && !e && b != '') {
     a.toLocaleString();
-  }
-  if(!e) {
     d = 0;
   }
   var data = 'date_deposit=' + a + '&sum_deposit=' + encodeURIComponent(b) + '&years_deposit=' + encodeURIComponent(c) + '&sum_refill=' + encodeURIComponent(d) + '&refill=' + encodeURIComponent(e);
-  var str_json = JSON.stringify(data);
-  console.log(data);
   xhr.open('POST', 'calc.php', true);
   xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
   xhr.onreadystatechange = function() {
